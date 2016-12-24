@@ -16,7 +16,7 @@ HandleExplosionInput
         move.b  HAVE_HAD_NO_INPUT,d0
         beq     AROUNDNOINPUT
         move.b  #0,HAVE_HAD_NO_INPUT
-
+        
 
         *Check and reduce the shots
         lea     SHOTS_LEFT,a6
@@ -36,7 +36,6 @@ HandleExplosionInput
         
         movem.l (sp)+,REGISTERS_7SEGMENT_LED            ;Load back the registers
         *---------------------------------------------------------------------------------------------------------------------
-
         
         movem.l REGISTERS_EXPLOSION,-(sp)               ;Save the registers        
 
@@ -74,13 +73,13 @@ HandleExplosionInput
 
         *--------------------------------------------------------------------------------------------------------------------------    
         *Play the Explosion Sound        
-        move.l  a1,-(sp)                                 ;Store duck movement data temporarily
+        move.l  a1,-(sp)                                ;Store duck movement data temporarily
         
         lea	    Explosion_Sound,a1
         move.l  #PLAY_SOUND_TRAP_CODE,d0
 	    TRAP    #15
         
-        move.l  (sp)+,a1                                 ;Load back duck movement data
+        move.l  (sp)+,a1                                ;Load back duck movement data
         *--------------------------------------------------------------------------------------------------------------------------    
 
 
@@ -115,6 +114,7 @@ NOSPACEBARINPUT:
         move.b  #1,HAVE_HAD_NO_INPUT
 AROUNDNOINPUT:
         rts   
+
 
 
 *~Font name~Courier New~

@@ -2,8 +2,8 @@
 * Title      : Random numbers
 * Written by : Nishanth Sundharesan
 * Date       : 9-October-2016
-* Description: This files contains 2 subroutines. One is to seed the Random number.
-*              The other one is to generate the random number.
+* Description: This files contains 2 subroutines. One is used to seed the Random number.
+*              The other one is used to generate the random number.
 *-----------------------------------------------------------
 
 *This subroutine is used to set the seed of the Random number
@@ -31,6 +31,7 @@ Ninc1
 	
         movem.l (sp)+,d1
         rts
+
 
 *~Font name~Courier New~
 *~Font size~10~

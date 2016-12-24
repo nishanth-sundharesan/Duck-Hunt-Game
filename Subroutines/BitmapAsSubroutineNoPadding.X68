@@ -17,7 +17,7 @@ PARAM_SCREEN_LOCATION_TOPLEFT_Y     EQU     4
 *Constant values
 *----------------------------------------------------
 FILE_OFFSET_TO_PIXELARRAY_BYTES   EQU     10
-TRANSPARENT_REPLACEMENT_COLOR     EQU     $0080E0E0                     ;Yellow color will act as transparent color
+TRANSPARENT_REPLACEMENT_COLOR     EQU     $0080E0E0                     ;Yellow color will act as the transparent color
 *----------------------------------------------------
 *Trap codes
 *----------------------------------------------------
@@ -71,14 +71,14 @@ LittleToBigEndianLong
 
 *This subroutine displays the chunk of the 256 color bitmap image.
 DisplayImage
-        move.l  (a5)+,a1                                        ;Load the address of the pixel array
-        move.l  (a5)+,a2                                        ;Load the address of the color table
-        move.l  (a5)+,d5                                        ;Load the width of the image
-        move.l  (a5)+,d3                                        ;Load the height of the image
+        move.l  (a5)+,a1                                            ;Load the address of the pixel array
+        move.l  (a5)+,a2                                            ;Load the address of the color table
+        move.l  (a5)+,d5                                            ;Load the width of the image
+        move.l  (a5)+,d3                                            ;Load the height of the image
                                                                                                                            
 
         move.l  PARAM_SCREEN_LOCATION_TOPLEFT_Y(sp),d2          
-        add.l   PARAM_BITMAP_CHUNK_HEIGHT(sp),d2                ;Y screen coordinate now points to the bottom left corner of the chunk image
+        add.l   PARAM_BITMAP_CHUNK_HEIGHT(sp),d2                    ;Y screen coordinate now points to the bottom left corner of the chunk image
         
                 
         *Let's move the address of the pixel array to the bottom left corner of the chunk image        
@@ -137,19 +137,18 @@ DrawEachPixel:
         
         
         *Draw the pixel on the X,Y co-ordinate
-        move.l  d7,d1                                        ;X co-ordinate should be kept in d1 register
-                                                             ;Y co-ordinate should be kept in d2 register
-        move.l  #DRAW_PIXEL_TRAP_CODE,d0                     ;Set the proper trap code to draw the pixel using the set pen color
+        move.l  d7,d1                                       ;X co-ordinate should be kept in d1 register
+                                                            ;Y co-ordinate should be kept in d2 register
+        move.l  #DRAW_PIXEL_TRAP_CODE,d0                    ;Set the proper trap code to draw the pixel using the set pen color
         trap    #15
 
 JumpTransparent:        
        *Increment the X co-ordinate
         addi.w    #1,d7
 
-        cmp.w   d4,d7                                      ;Check if the chunk width has been reached, if not continue drawing with the same row
+        cmp.w   d4,d7                                       ;Check if the chunk width has been reached, if not continue drawing with the same row
         bne     DrawEachPixel
-        
-        
+                
         *Increment the pixel array by the remaining width of the image
         add.l   (a4),a1
         
@@ -172,6 +171,7 @@ BackgroundImageData     ds.l    4
 SpriteImageData         ds.l    4
 GameOverImageData       ds.l    4 
 MenuScreenImageData     ds.l    4
+
 
 
 
