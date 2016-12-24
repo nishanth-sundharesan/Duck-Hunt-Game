@@ -202,7 +202,7 @@ SkipDeadDuck:
         jsr     DisplayFlyingDuck                       ;Display flying duck
 SkipFlyingDuck:
         
-        *Always display the duck and then Crosshair because when the Crosshair moves on top of duck the duck flickers
+        *Always display the Duck and then the Crosshair because when the Crosshair moves on top of the Duck, the Duck flickers
         move.l  d5,d1                                   ;X co-ordinate on the screen        
         move.l  d6,d2                                   ;Y co-ordinate on the screen
         
@@ -241,7 +241,7 @@ LoadDuckMovementData
         
         jsr     GetRandomByteIntoD0
         move.l  #(NUM_OF_DUCK_PATHS-1),d2               
-        and.b   d0,d2                                   ;Use AND instruction to get a Random number from 0 to (NUM_OF_DUCK_PATHS-1)(In out case, from 0 to 7)
+        and.b   d0,d2                                   ;Use AND instruction to get a Random number from 0 to (NUM_OF_DUCK_PATHS - 1)(In out case, from 0 to 7)
 
         move.l  TOTAL_DUCK_MOVEMENT,d0                  ;Move the Total duck movement, which is the length of the each path file
         mulu.w  d0,d2                                   ;Multiply it with the acquired random number to get the offset address of the random path file        
@@ -426,10 +426,10 @@ UpdateDuck
         move.l  #CONTROl_DIRECTX_TRAP_CODE,d0
         TRAP    #15
 
-        *Play the Duck fall sound        
+        *Play the Duck hit ground sound        
         move.l  a1,-(sp)                                 ;Store duck movement data temporarily
         
-        lea	    DuckFall_Sound,a1
+        lea	    DuckHitGround_Sound,a1
         move.l  #PLAY_SOUND_TRAP_CODE,d0
 	    TRAP    #15
         
@@ -499,7 +499,7 @@ SKIPQUACKSOUND:
         move.l  DUCK_VELOCITY,d0                         ;Load the duck velocity to d0
         
         *Display the duck               
-        cmp.l   #IS_DUCK_INCREMENT,(a1)+                 ;Check if velocity needs to be added to the X co-ordinate
+        cmp.l   #IS_DUCK_INCREMENT,(a1)+                 ;Check if the velocity needs to be added to the X co-ordinate
         bne     NOADDXVELOCITY
         add.l   d0,d3                                    ;If yes, then ADD the velocity to X co-ordinate(The bird will fly towards right)
         bra     NOSUBTRACTXVELOCITY
@@ -508,12 +508,12 @@ NOADDXVELOCITY:
         bne     NOSUBTRACTXVELOCITY                      
         sub.l   d0,d3                                    ;If yes, then SUBTRACT the velocity to X co-ordinate(The bird will fly towards left)
 NOSUBTRACTXVELOCITY:        
-        cmp.l   #IS_DUCK_INCREMENT,(a1)+                 ;Check if velocity needs to be subtracted to the Y co-ordinate
+        cmp.l   #IS_DUCK_INCREMENT,(a1)+                 ;Check if the velocity needs to be subtracted to the Y co-ordinate
         bne     NOSUBTRACTYVELOCITY
         sub.l   d0,d4                                    ;If yes, then SUBTRACT the velocity to the Y co-ordinate(The bird will fly upwards)
         bra     NOADDYVELOCITY      
 NOSUBTRACTYVELOCITY:
-        cmp.l   #IS_DUCK_DECREMENT,-4(a1)                ;Check if velocity needs to be added to the Y co-ordinate
+        cmp.l   #IS_DUCK_DECREMENT,-4(a1)                ;Check if the +velocity needs to be added to the Y co-ordinate
         bne     NOADDYVELOCITY
         add.l   d0,d4                                    ;If yes, then ADD the velocity to the Y co-ordinate(The bird will fly downwards)
         bra     NOADDYVELOCITY  
@@ -529,7 +529,7 @@ NOADDYVELOCITY:
         jsr     DisplayCrossHair                        ;Display the Crosshair
                                                         ;Drawing cross hair because we always want the Crosshair on top of the duck
                                         
-        *This code is used for keeping the game running, incase the duck moves out of the screen.
+        *This code is used for keeping the game running, in case the duck moves out of the screen.
         *Ideally the following compare shouldn't succeed
         lea     MAX_PATH_BEFOREFLY,a6
         sub.l   #1,(a6)        
@@ -621,7 +621,7 @@ DisplayFlyingDuck
         *--------------------------------------------------------------------------------------------------------------------------------------    
         rts
 
-
+*Shot duck -> The duck sprite which has it's mouth wide open and the eyes are popped out
 UpdateDeadDuckSprites
         *Check if the shot duck still needs to be displayed
         lea     ShotDuckLoopCount,a6
@@ -717,12 +717,13 @@ DeadDuckSprites     ds.l        1
 Duck_Flying_Sound   dc.b        'Audio/DuckFlyingSound.wav',0
 Explosion_Sound     dc.b        'Audio/ExplosionSound.wav',0
 GameOver_Sound      dc.b        'Audio/GameOverSound.wav',0
-DuckFall_Sound      dc.b        'Audio/DuckFallSound.wav',0
+DuckHitGround_Sound dc.b        'Audio/DuckHitGroundSound.wav',0
 MenuScreen_Sound    dc.b        'Audio/MenuScreenSound.wav',0
 DuckFalling_Sound   dc.b        'Audio/DuckFallingSound.wav',0
 DuckQuack_Sound     dc.b        'Audio/DuckQuackSound.wav',0
 LoadingText         dc.b        'Loading...',0
-    END    START                                        ; last line of source
+    END    START                                        ;Last line of source code
+
 
 
 
