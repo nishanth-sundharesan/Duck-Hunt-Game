@@ -25,9 +25,8 @@ NUMBER_OF_DIGITS            EQU     3
 BLACK_COLOR                 EQU     $00000000
 *----------------------------------------------------
 
-Display7Segment
-        
-    *Load the X and Y position of the score
+Display7Segment        
+    *Load the X and Y positions of the score
     lea     Number_Position_X,a3
     lea     Number_Position_Y,a4
     
@@ -38,7 +37,7 @@ Display7Segment
     TRAP    #15
 
     *Setting the color for the mask rectangle
-    move.l  #BLACK_COLOR,d1                    ;Set the pen and fill color to black        
+    move.l  #BLACK_COLOR,d1                    ;Set the pen color and fill color to black        
     move.l  #PEN_COLOR_TRAP_CODE,d0            ;Set the pen color
     TRAP    #15        
     move.l  #FILL_COLOR_TRAP_CODE,d0           ;Set the fill color
@@ -168,6 +167,23 @@ Led_End_X2      dc.l    LED_SIZE-LED_OFFSET,       LED_SIZE,            LED_SIZE
 Led_End_Y2      dc.l    0,                         LED_SIZE-LED_OFFSET, LED_SIZE+LED_SIZE-LED_OFFSET,   LED_SIZE+LED_SIZE,     LED_SIZE+LED_SIZE-LED_OFFSET,    LED_SIZE-LED_OFFSET,    LED_SIZE
 *--------------------------------a----------------------b----------------------c------------------------------d-----------------------e--------------------------------f------------------g-----------------
 DigitTable      dc.b    $3F,$06,$5B,$4F,$66,$6D,$7D,$07,$7F,$67
+
+*--------------------------------------------------------------------------------------
+*           Digit Table
+*
+*         g f e    d c b a
+* 0  =  0 0 1 1    1 1 1 1  =  3F
+* 1  =  0 0 0 0    0 1 1 0  =  06
+* 2  =  0 1 0 1    1 0 1 1  =  5B
+* 3  =  0 1 0 0    1 1 1 1  =  4F
+* 4  =  0 1 1 0    0 1 1 0  =  66
+* 5  =  0 1 1 0    1 1 0 1  =  6D
+* 6  =  0 1 1 1    1 1 0 1  =  7D
+* 7  =  0 0 0 0    0 1 1 1  =  07
+* 8  =  0 1 1 1    1 1 1 1  =  7F
+* 9  =  0 1 1 0    0 1 1 1  =  67
+*--------------------------------------------------------------------------------------
+
 
 
 
