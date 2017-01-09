@@ -16,7 +16,7 @@ Press Alt + Enter for full screen.
 The game starts with 3 + 1 lives. You lose a life when the duck flies away from the screen.  
 You get 3 shots per duck. You can shoot the dead duck to get additional scores.  
 
-This game was made for the school project at FIEA.  
+This game was made in two weeks and was for the school project at FIEA.  
 
 The project showcases the following features:  
 ---
