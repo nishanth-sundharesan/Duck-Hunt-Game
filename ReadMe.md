@@ -26,8 +26,10 @@ The project showcases the following features:
 4 - Fixed point math.  
 5 - Collision detection between game entities.  
 6 - A score indicator as a 7-segment LED.  
-7 - Randomness.  
+7 - Data driven path movement for the duck.
+8 - Sprite animations.
 
+##You can watch the demo video at - https://www.youtube.com/watch?v=dTLsQ5Og1sY
 
 ### The author of this program has no affiliation with Nintendo and in no way tries to infringe their copyrights.  
 
