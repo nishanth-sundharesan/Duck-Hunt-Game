@@ -20,14 +20,14 @@ This game was made in two weeks and was for the course project work.
 
 The project showcases the following features:  
 ---
-1 - User input control for the game entity.  
-2 - Bitmap background with entities moving over it.  
-3 - Physics update of the game entity.  
-4 - Fixed point math.  
-5 - Collision detection between game entities.  
-6 - A score indicator as a 7-segment LED.  
-7 - Data driven path movement for the duck. 
-8 - Sprite animations.
+1. User input control for the game entity.  
+2. Bitmap background with entities moving over it.  
+3. Physics update of the game entity.  
+4. Fixed point math.  
+5. Collision detection between game entities.  
+6. A score indicator as a 7-segment LED.  
+7. Data driven path movement for the duck.  
+8. Sprite animations.  
 
 ####You can watch the demo video at - https://www.youtube.com/watch?v=dTLsQ5Og1sY
 
